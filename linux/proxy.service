@@ -1,0 +1,17 @@
+[Unit]
+Description=Fast proxy service
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+; dir /etc/fast-proxy/
+;     - fast-proxy-linux-amd64
+;     - config.json
+; Example /etc/fast-proxy/fast-proxy-linux-amd64
+ExecStart=/etc/fast-proxy/fast-proxy-linux-amd64
+
+[Install]
+WantedBy=multi-user.target
