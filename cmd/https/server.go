@@ -11,7 +11,7 @@ import (
 )
 
 var (
-	config, _       = https.LoadConfiguration()
+	config          *https.Configuration
 	responseTimeout = time.Second
 )
 
@@ -25,6 +25,12 @@ func redirect(ctx *fasthttp.RequestCtx) {
 }
 
 func main() {
+	configuration, err := https.LoadConfiguration()
+	if err != nil {
+		println(err.Error())
+		return
+	}
+	config = configuration
 	certManager := &autocert.Manager{
 		Prompt:     autocert.AcceptTOS,
 		HostPolicy: autocert.HostWhitelist(config.HostsPolicy...),
